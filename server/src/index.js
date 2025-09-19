@@ -36,6 +36,16 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
+
 // Error handler
 app.use((err, req, res, next) => {
   logger.error(err.stack);
@@ -46,13 +56,12 @@ app.use((err, req, res, next) => {
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  maxPoolSize: 10
-})
-  .then(() => {
-    logger.info('Connected to MongoDB');
-    app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
-  })
-  .catch((err) => {
-    logger.error('MongoDB connection error:', err);
-    process.exit(1);
-  }); 
+  poolSize: 10, // Connection pooling
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  logger.info('Connected to MongoDB');
+  app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
+});

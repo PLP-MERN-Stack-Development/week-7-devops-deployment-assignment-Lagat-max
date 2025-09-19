@@ -1,5 +1,56 @@
 # MERN Stack Production Deployment Assignment
 
+## Deployment Instructions
+
+### Prerequisites
+- Node.js and npm installed
+- Accounts on GitHub, MongoDB Atlas, Render/Railway/Heroku, Vercel/Netlify/GitHub Pages
+
+### Environment Setup
+1. Clone the repository:
+   ```sh
+   git clone <your-repo-url>
+   cd <repo-folder>
+   ```
+2. Install dependencies for both client and server:
+   ```sh
+   cd client && npm install
+   cd ../server && npm install
+   ```
+3. Create environment variable files:
+   - Copy `.env.example` to `.env` in both client and server folders and fill in your values.
+
+### Backend Deployment (Express.js)
+1. Push your code to GitHub.
+2. Connect your repository to Render, Railway, or Heroku.
+3. Set environment variables in the cloud platform dashboard.
+4. Enable automatic deploys from GitHub.
+5. (Optional) Configure a custom domain and HTTPS.
+
+### Frontend Deployment (React)
+1. Push your code to GitHub.
+2. Connect your repository to Vercel, Netlify, or GitHub Pages.
+3. Set build settings and environment variables.
+4. Enable automatic deploys from GitHub.
+5. (Optional) Configure a custom domain and HTTPS.
+
+### CI/CD Setup
+1. Use GitHub Actions workflows for testing and deployment.
+2. Example workflow files are in `.github/workflows/`.
+3. On each push, tests and builds will run automatically.
+
+### Links
+- **Frontend:** [Deployed URL here]
+- **Backend API:** [Deployed URL here]
+
+### Monitoring & Maintenance
+- Health check endpoint available at `/health` (backend)
+- Set up uptime monitoring using services like UptimeRobot or Pingdom
+- Error tracking: Integrate Sentry or similar for backend and frontend
+- Performance monitoring: Use server resource monitoring tools and browser performance APIs
+- Database backups: Schedule regular backups in MongoDB Atlas
+- Maintenance plan: Document update, patch, and rollback procedures
+
 ## Overview
 This project demonstrates a production-ready MERN stack application with CI/CD, environment configuration, monitoring, and deployment to cloud platforms.
 
@@ -61,4 +112,4 @@ This project demonstrates a production-ready MERN stack application with CI/CD, 
 
 
 ## License
-MIT 
+MIT
